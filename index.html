@@ -19,7 +19,7 @@
 <style>
 :root{
   --bg:#f7f4ee; --card:#fffdf9; --ink:#2b2722; --line:#ece5d8;
-  --c-nicolas:#4f46e5; --c-sdisvj:#e11d48; --c-sevj:#0284c7; --c-commande:#059669; --c-gold:#c79a3a;
+  --c-nicolas:#4f46e5; --c-sdisvj:#e11d48; --c-sevj:#0284c7; --c-commande:#059669; --c-gold:#c79a3a; --c-config:#64748b;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -203,6 +203,10 @@ const DATA = [
   { name:"Commande", color:"var(--c-commande)", icon:"cart", links:[
     { title:"Commande sur Grati", url:"https://nicolas9696-admin.github.io/commande_sur_grati/" },
   ]},
+  { name:"Configuration", color:"var(--c-config)", icon:"gear", links:[
+    { title:"Tous mes GitHub", url:"https://github.com/nicolas9696-admin" },
+    { title:"Apps Script",     url:"https://script.google.com/home" },
+  ]},
 ];
 /* ===================================================================== */
 
@@ -219,6 +223,7 @@ const ICONS={
   flame:  svg('<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/>'),
   bolt:   svg('<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/>'),
   cart:   svg('<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L23 6H5"/>'),
+  gear:   svg('<path d="M12.2 2h-.4a2 2 0 0 0-2 2v.2a2 2 0 0 1-1 1.7l-.4.3a2 2 0 0 1-2 0l-.2-.1a2 2 0 0 0-2.7.8l-.2.3a2 2 0 0 0 .7 2.8l.2.1a2 2 0 0 1 1 1.7v.5a2 2 0 0 1-1 1.7l-.2.1a2 2 0 0 0-.7 2.8l.2.3a2 2 0 0 0 2.7.8l.2-.1a2 2 0 0 1 2 0l.4.3a2 2 0 0 1 1 1.7V20a2 2 0 0 0 2 2h.4a2 2 0 0 0 2-2v-.2a2 2 0 0 1 1-1.7l.4-.3a2 2 0 0 1 2 0l.2.1a2 2 0 0 0 2.7-.8l.2-.3a2 2 0 0 0-.7-2.8l-.2-.1a2 2 0 0 1-1-1.7v-.5a2 2 0 0 1 1-1.7l.2-.1a2 2 0 0 0 .7-2.8l-.2-.3a2 2 0 0 0-2.7-.8l-.2.1a2 2 0 0 1-2 0l-.4-.3a2 2 0 0 1-1-1.7V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/>'),
   star:   svg('<path d="M12 2 15.1 8.3 22 9.3l-5 4.9 1.2 6.9L12 17.8 5.8 21 7 14.1 2 9.3l6.9-1L12 2Z"/>')
 };
 const ICN={
