@@ -108,6 +108,9 @@ h1{font-family:'Fraunces';font-weight:800;font-size:clamp(46px,9vw,80px);line-he
 .arrow{flex-shrink:0;color:var(--accent);opacity:.55;transition:.3s;display:grid;place-items:center}
 .card:hover .arrow{opacity:1;transform:translate(3px,-3px)}
 
+.card.offline{opacity:.72}
+.card.offline .t{color:var(--c-sdisvj);text-decoration:line-through;text-decoration-thickness:2px}
+.card.offline .site-dot.down{background:#e11d48;color:#e11d48;animation:none}
 .empty{display:none;text-align:center;padding:90px 0;opacity:.4}
 .empty.show{display:block}
 footer{margin-top:90px;text-align:center;font-size:13px;opacity:.4}
@@ -206,7 +209,7 @@ const DATA = [
     { title:"Comptoir SEVJ",  url:"https://nicolas9696-admin.github.io/SEVJ_Comptoir/" },
   ]},
   { name:"Commande", color:"var(--c-commande)", icon:"cart", links:[
-    { title:"Commande sur Grati", url:"https://nicolas9696-admin.github.io/commande_sur_grati/" },
+    { title:"Commande sur Grati", url:"https://nicolas9696-admin.github.io/commande_sur_grati/", offline:true },
   ]},
   { name:"Configuration", color:"var(--c-config)", icon:"gear", links:[
     { title:"Tous mes GitHub", url:"https://github.com/nicolas9696-admin" },
@@ -251,7 +254,7 @@ const board=document.getElementById('board'), search=document.getElementById('se
 
 /* ---------- données dérivées ---------- */
 const linkIndex={};
-DATA.forEach(c=>c.links.forEach(l=>{linkIndex[l.url]={title:l.title,url:l.url,color:c.color,catName:c.name};}));
+DATA.forEach(c=>c.links.forEach(l=>{linkIndex[l.url]={title:l.title,url:l.url,color:c.color,catName:c.name,offline:!!l.offline};}));
 const favorites=new Set(store.get('favorites',[]));
 let currentFilter="";
 let kbd=[], sel=-1, eggFired=false, lastCheck=0, dragSrc=null;
@@ -303,7 +306,7 @@ function render(filter){
     urls.forEach(u=>{
       const l=linkIndex[u], fav=favorites.has(u)?' on':'';
       const a=document.createElement('a');
-      a.className='card'; a.href=u; a.target='_blank'; a.rel='noopener';
+      a.className='card'+(l.offline?' offline':''); a.href=u; a.target='_blank'; a.rel='noopener';
       a.dataset.url=u; a.dataset.group=g.key; a.draggable=dragOK;
       a.innerHTML=`<span class="logo">${initials(l.title)}<i class="site-dot checking" data-url="${u}"></i></span>
         <span class="meta"><div class="t">${l.title}</div><div class="u">${prettyUrl(u)}</div></span>
@@ -333,6 +336,7 @@ function paintDots(){
   });
 }
 function checkSite(url){
+  if(linkIndex[url]&&linkIndex[url].offline){siteStatus[url]='down';paintDots();return;}
   siteStatus[url]='checking';
   const ctrl=new AbortController(), to=setTimeout(()=>ctrl.abort(),7000);
   fetch(url,{mode:'no-cors',cache:'no-store',signal:ctrl.signal})
